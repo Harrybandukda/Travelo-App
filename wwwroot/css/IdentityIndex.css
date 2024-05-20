@@ -1,0 +1,29 @@
+﻿body, h1, h2, h3, h4, h5, h6, input, button, select, textarea {
+    font-family: 'Roboto', sans-serif;
+}
+
+.profile-container {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#profilePicture {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.profile-header {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #0062cc;
+    border-color: #005cbf;
+}

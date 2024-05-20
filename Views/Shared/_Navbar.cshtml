@@ -1,0 +1,86 @@
+﻿@using COMP2139_Assignment1.Models
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+    <div class="container-fluid" id="navBar">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" id="logo"><i class="fa-solid fa-jedi"></i> Travelo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+            <ul class="navbar-nav flex-grow-1 justify-content-end">
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Flights" asp-action="Index"><i class="fa-solid fa-plane-departure"></i> Flights Booking</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Cars" asp-action="Index"> <i class="fa-solid fa-car"></i> Cars Booking</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Hotels" asp-action="Index"> <i class="fa-solid fa-hotel"></i> Hotels Booking</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Cart" asp-action="Index"><i class="fa-solid fa-cart-plus"></i> My Cart</a>
+                </li>
+
+                @if (User.IsInRole("SuperAdmin"))
+                {
+                <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="RoleManager" asp-action="Dashboard"><i class="fa-solid fa-toolbox"></i> Admin Dashboard</a>
+                </li>
+                }
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage your profile" style="color: white;">Hello @User.Identity?.Name</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <form asp-area="Identity" asp-page="/Account/Logout" method="post">
+                            <button type="submit" class="nav-link btn btn-link" style="cursor:pointer; color: white;"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                        </form>
+                    </li>
+
+                }
+                else
+                {
+                    //Login
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Identity"
+                           asp-page="/Account/Login" style="color: white"><i class="fa fa-sign-in-alt"></i> Login</a>
+                    </li>
+
+                    //Register
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Identity"
+                           asp-page="/Account/Register" style="color:white"><i class="fa fa-user-plus"></i> Register</a>
+                    </li>
+                }
+
+            </ul>
+
+            <!-- Make this SEARCH BOX NICE WITH CSS AND BS-->
+            <form asp-controller="Home" asp-action="Search" method="get" class="form-inline ml-auto">
+                <div class="input-group">
+                    <input type="text" name="query" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="button-search">
+                    <select name="filter" class="form-control custom-select">
+                        <option value="All">All</option>
+                        <option value="Flights">Flights</option>
+                        <option value="Hotels">Hotels</option>
+                        <option value="CarRentals">Car Rentals</option>
+                    </select>
+                    &nbsp;
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-search">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>

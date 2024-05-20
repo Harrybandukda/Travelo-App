@@ -1,0 +1,106 @@
+﻿@page
+@model RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/css/SellerToggle.css">
+<link rel="stylesheet" href="~/css/Register.css">
+
+<h1 class="text-center mt-5 mb-4">@ViewData["Title"]</h1>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg p-4 mb-5 bg-white rounded">
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h2 class="text-center">Create a new account.</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="Bruce" />
+                    <label asp-for="Input.FirstName">First Name</label>
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.LastName" class="form-control" aria-required="true" placeholder="Wayne" />
+                    <label asp-for="Input.LastName">Last Name</label>
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.Email">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.FrequentFlyerNumber" class="form-control" aria-required="true" placeholder="XXXXXXXX" />
+                    <label asp-for="Input.FrequentFlyerNumber">Frequent Flyer Number</label>
+                    <span asp-validation-for="Input.FrequentFlyerNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" id="password" autocomplete="new-password" aria-required="true" placeholder="password" onkeyup="validatePassword()" />
+                    <label asp-for="Input.Password">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <ul id="passwordCriteria" class="password-criteria">
+                    <li id="length" class="invalid">At least 8 characters</li>
+                    <li id="uppercase" class="invalid">At least 1 uppercase letter</li>
+                    <li id="number" class="invalid">At least 1 number</li>
+                    <li id="special" class="invalid">At least 1 special character</li>
+                </ul>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <div>
+                        <input type="checkbox" asp-for="Input.IsSeller" id="termsCheckbox" class="custom-checkbox" />
+                        <label class="custom-checkbox-label" for="termsCheckbox">Switch to Seller Account</label>
+                    </div>
+                </div>
+                <div class="modal" tabindex="-1" role="dialog" id="termsModal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Terms and Conditions For Seller Account</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h6>Terms and Conditions for Sellers</h6>
+                                <p>Welcome to Travelo! As a seller on our platform, you are required to adhere to the following terms and conditions:</p>
+                                <ol>
+                                    <li><strong>Post Limitation:</strong> Sellers cannot post more than 3 posts per hour. This limitation is in place to ensure fairness and efficiency in the use of our platform.</li>
+                                    <li><strong>Competitive Pricing:</strong> Sellers should provide competitive pricing to ensure that Travelo remains a preferred destination for quality and value.</li>
+                                    <li><strong>Account Cancellation:</strong> Travelo reserves the right to cancel any seller account that violates our terms or engages in prohibited activities.</li>
+                                    <li><strong>IP Ban:</strong> Travelo reserves the right to ban any seller's IP address in cases of repeated violations or fraud.</li>
+                                    <li><strong>Documentation Request:</strong> Travelo has the right to request further documentation from your seller company to prove the legitimacy of your postings and operations.</li>
+                                </ol>
+                                <p>By agreeing to these terms, you commit to uphold these standards and accept that non-compliance may result in various forms of action, including but not limited to account suspension or termination.</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Disagree</button>
+                                <button type="button" class="btn btn-primary" id="agreeBtn">Agree</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+ 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/SellerAccount.js"></script>
+    <script src="~/js/PasswordValidation.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+}
+
+
+
+
+

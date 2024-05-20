@@ -1,0 +1,95 @@
+﻿
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<div class="container my-5">
+    <div class="card mx-auto" style="max-width: 400px;">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">Checkout</h2>
+            <div class="text-center">
+                <button id="loginRedirect" class="btn btn-primary btn-lg mb-2">Login</button>
+                <button id="guestCheckoutToggle" class="btn btn-secondary btn-lg mb-2">Checkout as Guest</button>
+            </div>
+            <div id="guestForm" class="hidden form-container">
+                <form asp-action="GuestCheckout" method="post">
+                    <div class="form-group">
+                        <label for="FullName">Full Name</label>
+                        <input type="text" class="form-control" id="FullName" name="FullName" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="email" class="form-control" id="Email" name="Email" placeholder="Email" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Checkout as Guest</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#loginRedirect').click(function () {
+            window.location.href = '/Identity/Account/Login';
+        });
+
+        $('#guestCheckoutToggle').click(function () {
+            $('#guestForm').slideToggle('fast');
+        });
+    });
+</script>
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .form-container {
+        margin-top: 20px;
+    }
+
+    .btn-lg {
+        width: 80%;
+    }
+
+    h2 {
+        font-weight: 700;
+        color: #333;
+    }
+
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        border-radius: 10px;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-control {
+        border-radius: 20px;
+        padding: .75rem .75rem;
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+
+    .btn-success {
+        border-radius: 20px;
+        padding: .375rem .75rem;
+        width: 100%;
+    }
+</style>
+

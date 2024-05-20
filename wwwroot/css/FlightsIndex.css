@@ -1,0 +1,12 @@
+﻿.card:hover {
+    transform: scale(1.05);
+    background-color: #e0e0e0;
+}
+
+.card {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, background-color 0.3s;
+}
